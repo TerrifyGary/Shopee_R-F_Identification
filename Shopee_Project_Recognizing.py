@@ -48,6 +48,13 @@ def checking(comments):
                 f_word_times +=1
     return f_word_times
 
+def rating_bad(seller_name):
+    result = requests.get(f"https://shopee.tw/api/v2/shop/get?username={seller_name}")
+    data = json.loads(result.text)
+    n_rating_bad = data['data']['rating_bad']
+
+    return n_rating_bad
+
 if __name__ == '__main__':
 
     text = input("Enter Seller Name ")
@@ -57,3 +64,4 @@ if __name__ == '__main__':
 
     # print(len(seller_comment))
     print('Numbers of Fake Detected = ',checking(seller_comment))
+    print('Numbers of Rating Bad = ',rating_bad(text))
