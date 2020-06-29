@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
+# from fake_useragent import UserAgent
 import requests
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+# from selenium import webdriver
+# from selenium.webdriver.common.keys import Keys
 import time
 import random
 import json
@@ -55,6 +55,20 @@ def rating_bad(seller_name):
 
     return n_rating_bad
 
+def response_rate(seller_name):
+    result = requests.get(f"https://shopee.tw/api/v2/shop/get?username={seller_name}")
+    data = json.loads(result.text)
+    n_response_rate = data['data']['response_rate']
+    
+    return n_response_rate
+
+def rating_star(seller_name):
+    result = requests.get(f"https://shopee.tw/api/v2/shop/get?username={seller_name}")
+    data = json.loads(result.text)
+    n_rating_star = data['data']['rating_star']
+
+    return n_rating_star
+
 if __name__ == '__main__':
 
     text = input("Enter Seller Name ")
@@ -65,3 +79,5 @@ if __name__ == '__main__':
     # print(len(seller_comment))
     print('Numbers of Fake Detected = ',checking(seller_comment))
     print('Numbers of Rating Bad = ',rating_bad(text))
+    print('The avg raring star = ',rating_star(text))
+    print('The response rate = ',response_rate(text))
