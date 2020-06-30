@@ -90,6 +90,8 @@ def get_mall_price(url):
     return avg_official_price
 
 def get_web_info(url):
+    check = True
+    p_, s_ = '',''
     r_item_page = requests.get(url,headers=headers)
     soup_item_page = BeautifulSoup(r_item_page.text,'html.parser')
     contents_item_page = soup_item_page.find_all("div",class_ = 'qaNIZv')
