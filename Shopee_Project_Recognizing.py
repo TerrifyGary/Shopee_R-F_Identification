@@ -46,7 +46,7 @@ def checking(comments):
         for y in x:
             if(y=='假' or y=='仿' or y=='爛'):
                 f_word_times +=1
-    return f_word_times
+    return float(f_word_times/len(comments)*100)
 
 def rating_bad(seller_name):
     result = requests.get(f"https://shopee.tw/api/v2/shop/get?username={seller_name}")
@@ -77,7 +77,7 @@ if __name__ == '__main__':
         scraping_comments(text,x)
 
     # print(len(seller_comment))
-    print('Numbers of Fake Detected = ',checking(seller_comment))
+    print('Numbers of Fake Detected = ',checking(seller_comment),'%')
     print('Numbers of Rating Bad = ',rating_bad(text))
     print('The avg raring star = ',rating_star(text))
     print('The response rate = ',response_rate(text))
