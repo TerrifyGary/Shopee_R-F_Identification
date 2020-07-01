@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
+# from fake_useragent import UserAgent
 import requests
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+# from selenium import webdriver
+# from selenium.webdriver.common.keys import Keys
 import time
 import random
 import json
