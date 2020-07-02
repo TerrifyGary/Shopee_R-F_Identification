@@ -19,6 +19,14 @@ headers = {'user-agent': 'Googlebot','From': 'YOUR EMAIL ADDRESS'}
 
 one_star_len2_stopwords = ["糟糕","仿冒","山寨","假貨"]
 one_star_len1_stopwords = ["假","仿","F","f","爛"]
+two_star_len2_stopwords = []
+two_star_len1_stopwords = []
+three_star_len2_stopwords = []
+three_star_len1_stopwords = []
+four_star_len2_stopwords = []
+four_star_len1_stopwords = [] 
+five_star_len2_stopwords = []
+five_star_len1_stopwords = []
 
 def scraping_comments(seller_name, star_of_comment):
     
@@ -45,25 +53,28 @@ def scraping_comments(seller_name, star_of_comment):
         for y in range(len(data['data']['items'])):
             item = data['data']['items'][y]
             comment = item['comment']
-            if (comment != None and len(comment)>0 and comment != 'None'):
+            if (comment != None and len(comment)>0 and comment != 'None'): # basic filter
                 seller_comment.append(comment)
     return seller_comment
 
-def checking(comments):
-    # finding the substring
-    star_1_comment = 0
-    for x in comments:
-        for c in one_star_len2_stopwords:
-            if c in x:
-                x.replace(c,'')
-                star_1_comment +=1
-    for y in comments:       
-        for d in one_star_len1_stopwords:
-            if d in y:
-                y.replace(d,'')
-                star_1_comment +=1 
+def get_word_times_in_sentence(sentence,stopwords,n):
+    
+    for c in stopwords:
+        if c in sentence:
+            sentence.replace(c,'')
+            n+=1
 
-    return int(star_1_comment)
+    return n
+
+def couting_times(comments):
+    # finding the substring
+    star_comment_times = [0,0,0,0,0]
+    
+    for x in comments:
+        star_comment_times[0] = get_word_times_in_sentence(x,one_star_len2_stopwords,star_comment_times[0])
+        star_comment_times[0] = get_word_times_in_sentence(x,one_star_len1_stopwords,star_comment_times[0])
+
+    return star_comment_times
 
 def rating_bad(seller_name):
     result = requests.get(f"https://shopee.tw/api/v2/shop/get?username={seller_name}")
@@ -88,7 +99,6 @@ def rating_star(seller_name):
 
 def get_mall_price(url):
     all_price = []
-    # url = "https://shopee.tw/mall/search?keyword=yeezy boost"
 
     r = requests.get(url,headers=headers)
     if r.status_code == 200:
@@ -150,7 +160,7 @@ if __name__ == '__main__':
 
     # print(len(seller_comment))
     print('The Number of comments from 1~5 star = ',num_of_comment)
-    print('Numbers of Fake Detected = ',checking(seller_comment))
+    print('Numbers of Fake Detected = ',couting_times(seller_comment))
     print('Numbers of Rating Bad = ',rating_bad(text))
     print('The avg raring star = ',rating_star(text))
     print('The response rate = ',response_rate(text))
