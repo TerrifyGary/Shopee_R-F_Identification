@@ -3,9 +3,9 @@ import pandas as pd
 import jieba
 from collections import Counter
 # Create your connection.
-conn = sqlite3.connect('C:/Users/user/Desktop/Shopee_R-F_Identification/Data.db')
-jieba.set_dictionary('C:/Users/user/Desktop/Shopee_R-F_Identification/dict.txt.big.txt')
-def top_words(star):
+conn = sqlite3.connect('./Shopee_R-F_Identification/Data.db')
+jieba.set_dictionary('./Shopee_R-F_Identification/dict.txt.big.txt')
+def top_words(star, num):
     df = pd.read_sql_query("SELECT * FROM rating", conn)
     df = pd.read_sql_query("SELECT * FROM rating WHERE star == (?)", conn, params=(star,))
     stopwords = ['的']
@@ -19,10 +19,13 @@ def top_words(star):
     for ele in words: 
         if ele.strip('n'): 
             res.append(ele)     
-    return Counter(words).most_common(20)
+    return Counter(words).most_common(num)
 
+
+
+num = 10
 for x in range(5):
-    print('Number of star:',x+1,'Top 10 comments: ',top_words(star = x+1))
+    print('Number of star:',x+1,'Top 10 comments: ',top_words(x+1, num))
     
 conn.commit()
 conn.close()
