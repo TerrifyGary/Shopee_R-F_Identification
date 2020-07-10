@@ -11,22 +11,26 @@ import timeit
 import time
 
 
-start_time = time.time() # Recording the time of running the code
+
 
 seller_comment = []
 num_of_comment = []
 headers = {'user-agent': 'Googlebot','From': 'YOUR EMAIL ADDRESS'}
 
-one_star_len2_stopwords = ["糟糕","仿冒","山寨","假貨"]
-one_star_len1_stopwords = ["假","仿","F","f","爛"]
-two_star_len2_stopwords = []
-two_star_len1_stopwords = []
-three_star_len2_stopwords = []
-three_star_len1_stopwords = []
-four_star_len2_stopwords = []
-four_star_len1_stopwords = [] 
-five_star_len2_stopwords = []
-five_star_len1_stopwords = []
+one_star_len2_words = ["糟糕","惡劣","低端"] #change name later
+one_star_len1_words = ["爛","糟","慘","臭","醜"]
+two_star_len2_words = []
+two_star_len1_words = []
+three_star_len2_words = []
+three_star_len1_words = []
+four_star_len2_words = []
+four_star_len1_words = [] 
+five_star_len2_words = []
+five_star_len1_words = []
+
+
+fake_one_len1_words = ["假","仿"]
+fake_one_len2_words = ["仿冒","山寨","假貨"]
 
 def scraping_comments(seller_name, star_of_comment):
     
@@ -57,9 +61,9 @@ def scraping_comments(seller_name, star_of_comment):
                 seller_comment.append(comment)
     return seller_comment
 
-def get_word_times_in_sentence(sentence,stopwords,n):
+def get_word_times_in_sentence(sentence,words,n):
     
-    for c in stopwords:
+    for c in words:
         if c in sentence:
             sentence.replace(c,'')
             n+=1
@@ -71,10 +75,19 @@ def couting_times(comments):
     star_comment_times = [0,0,0,0,0]
     
     for x in comments:
-        star_comment_times[0] = get_word_times_in_sentence(x,one_star_len2_stopwords,star_comment_times[0])
-        star_comment_times[0] = get_word_times_in_sentence(x,one_star_len1_stopwords,star_comment_times[0])
+        star_comment_times[0] = get_word_times_in_sentence(x,one_star_len2_words,star_comment_times[0])
+        star_comment_times[0] = get_word_times_in_sentence(x,one_star_len1_words,star_comment_times[0])
 
     return star_comment_times
+
+def couting_fake(comments):
+
+    f_word_times = 0
+
+    for x in comments:
+        f_word_times  = get_word_times_in_sentence(x,fake_one_len2_words,f_word_times)
+        f_word_times  = get_word_times_in_sentence(x,fake_one_len1_words,f_word_times)
+    return f_word_times
 
 def rating_bad(seller_name):
     result = requests.get(f"https://shopee.tw/api/v2/shop/get?username={seller_name}")
@@ -152,7 +165,7 @@ if __name__ == '__main__':
     # text = input("Enter Seller Name : ")
     product = input("Enter Product Name : ")
     product_webpage_url = input("Enter Your Product Page URL : ")
-
+    start_time = time.time() # Recording the time of running the code
     price,text = get_web_info(product_webpage_url)
     mall_price = get_mall_price(f"https://shopee.tw/mall/search?keyword={product}")
     for x in range(1,6,1):
@@ -161,6 +174,7 @@ if __name__ == '__main__':
     # print(len(seller_comment))
     print('The Number of comments from 1~5 star = ',num_of_comment)
     print('Numbers of Fake Detected = ',couting_times(seller_comment))
+    print('Fake Words appearence times = ',couting_fake(seller_comment))
     print('Numbers of Rating Bad = ',rating_bad(text))
     print('The avg raring star = ',rating_star(text))
     print('The response rate = ',response_rate(text))
