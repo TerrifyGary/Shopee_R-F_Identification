@@ -3,6 +3,7 @@ import jieba
 from collections import Counter
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
 #https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50
 jieba.set_dictionary('./Shopee_R-F_Identification/dict.txt.big.txt')
 
