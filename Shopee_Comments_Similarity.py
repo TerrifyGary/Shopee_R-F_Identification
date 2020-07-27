@@ -4,7 +4,6 @@ from collections import Counter
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import pandas as pd
 #https://towardsdatascience.com/overview-of-text-similarity-metrics-3397c4601f50
 jieba.set_dictionary('./dict.txt.big.txt')
 
