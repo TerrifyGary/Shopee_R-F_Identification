@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    return render_template('app.html')
+    return render_template('app.html',static_url_path='/static')
 
 
 @app.route('/send', methods=['POST'])
