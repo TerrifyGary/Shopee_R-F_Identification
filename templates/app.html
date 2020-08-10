@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    
-    <title>Calculator</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <title>Calculator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
     .container {
       position: relative;
       text-align: center;
@@ -47,72 +45,55 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: red;
+      color: #80ced6;
       font-size: 70px;
     }
-    </style>
 
-    <style>
-      .alert {
-        background: #80ced6;
-        padding: 1rem;
-        border-radius: 5px;
-        color: #fefbd8;
-        margin: 1rem;
-      }
-    </style>
-  </head>
-  <body style="background-color: #333333;">
-    
-    <!-- <div class="container">
-      <h3>Shopee Counterfiet Recognizer</h3>
-      <img src="/static/Fake.jpg" style="max-width:50%;height:auto;">
+    .alert {
+      background: #80ced6;
+      padding: 1rem;
+      border-radius: 5px;
+      color: #fefbd8;
+      margin: 1rem;
+    }
+  </style>
+</head>
 
-      
-    </div> -->
-    <div class="container">
-      <img src="/static/Fake.jpg"  style="width:100%;">
-      <!-- <div class="bottom-left">Bottom Left</div>
-      <div class="top-left">Top Left</div>
-      <div class="top-right">Top Right</div>
-      <div class="bottom-right">Bottom Right</div> -->
-      <div class="centered">Shopee Counterfiet Recognizer</div>
-    </div> 
+<body style="background-color: #616161;">
 
-    
-    <div class="container">
-       
-      <form action="/send" method="POST">
-        <label for="Number One">Website URL</label>
-        <input
-          type="text"
-          placeholder="Website URL"
-          class="u-full-width"
-          name="num1"
-        />
+  <div class="container">
+    <img src="/static/background.jpg" style="width:100%;">
+    <div class="centered">Shopee Counterfiet Recognizer</div>
+  </div>
 
-        <label for="Number Two">Product Name</label>
-        <input
-          type="text"
-          placeholder="Product Name"
-          class="u-full-width"
-          name="num2"
-        />
 
-        <label for="Operation">Operation</label>
-        <select class="u-full-width" name="operation">
-          <option value="add">Add</option>
-          <option value="subtract">Subtract</option>
-          <option value="multiply">Multiply</option>
-          <option value="divide">Divide</option>
-        </select>
+  <div class="container">
+    <form action="/send" method="POST">
+      <label for="Product_URL">Website URL</label>
+      <input type="text" placeholder="Website URL" class="u-full-width" name="Product_URL" />
 
-        <input type="submit" value="Calculate" id="calc_btn" />
-        <br />
-        <div class="alert">
-          {{ sum }}
-        </div>
-      </form>
-    </div>
-  </body>
+      <label for="Product_Name">Product Name</label>
+      <input type="text" placeholder="Product Name" class="u-full-width" name="Product_Name" />
+
+      <label for="Operation">Priority</label>
+      <select class="u-full-width" name="operation">
+        <option value="fake_words">fake_words</option>
+        <option value="shipping_time">shipping_time</option>
+        <option value="rating_stars">rating_stars</option>
+        <option value="delta_price">delta_price</option>
+      </select>
+
+      <input type="submit" value="Calculate" id="calc_btn" />
+      <br />
+      <div class="alert">
+        The Result is {{ sum }}
+      </div>
+
+      <div class="alert">
+        The Fake Score is {{ sum }}
+      </div>
+    </form>
+  </div>
+</body>
+
 </html>
