@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,500&display=swap" rel="stylesheet"> 
+    <title>Zero Fake</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+        }
+
+        .score{
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .container{
+            height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(#74ebd5 0%, #9face6 100%);
+        }
+
+        .scene .rocket{
+            position: relative;
+            animation: animate 0.2s ease infinite;
+        }
+        @keyframes animate{
+            0%,100%{
+                transform: translateY(-2px);
+            }
+            50%{
+                transform: translateY(2px);
+            }
+        }
+        .scene{
+            position: relative;
+            width: 100%;
+            height: 40vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scene i {
+            position: absolute;
+            top: -250px;
+            background: rgba(255, 255, 255, 0.5);
+            animation: animateStars linear infinite;
+        }
+
+        @keyframes animateStars{
+            0%{
+                transform: translateY(0);
+            }
+            100%{
+                transform: translateY(200vh);
+            }
+        }
+
+        .scene .rocket::before{
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 200px;
+            background: linear-gradient(#ebe849, transparent);
+        }
+
+        .scene .rocket::after{
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 200px;
+            background: linear-gradient(#ebe849, transparent);
+            filter: blur(20px);
+        }
+
+    </style>
+  </head>
+  <div class="container">
+    <div class="score">
+        <h2>Score：825 / 1000</h2>
+    </div>
+    <div class="scene">
+        <div class="rocket">
+            <img src="rocket.png" alt="">
+        </div>
+    </div>
+
+    <form style="color: white; padding: 15px;">
+        <div class="form-group">
+          <label for="productURL">Website URL</label>
+          <input type="text" class="form-control" id="productURL" placeholder="Website URL">
+        </div>
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input type="text" class="form-control" id="productName" placeholder="Product Name">
+        </div>
+        <div class="form-group">
+            <label for="Operation">Operation</label>
+            <select class="form-control" id="Operation">
+                <option>Add</option>
+                <option>Sub</option>
+                <option>Product</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>            
+        <div class="row" style="justify-content: flex-end;" >
+            <input class="btn btn-primary" type="submit" value="Calculate" style="width: 100px; height: 50px; margin-right: 15px;" >
+        </div>
+        
+        
+            
+        
+    </form>
+  </div>
+    
+
+    <script>
+        function stars(){
+            let count = 50;
+            let scene = document.querySelector('.scene');
+            let i = 0;
+            while(i<count){
+                let star = document.createElement('i');
+                let x = Math.floor(Math.random() * window.innerWidth);
+
+                let duration = Math.random() * 1;
+                let h = Math.random() * 100;
+
+                star.style.left = x + 'px';
+                star.style.width = 1 + 'px';
+                star.style.height = h + 'px';
+                star.style.animationDuration = duration + 's';                
+                scene.appendChild(star);
+                i++;
+            }
+            
+        }
+        stars();
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
