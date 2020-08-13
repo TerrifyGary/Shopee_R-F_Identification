@@ -22,13 +22,13 @@ def top_words(star, num):
         if ele.strip('n'): 
             res.append(ele)     
     # return Counter(words).most_common(num)
-    return res,Counter(res)
+    return res
 
 
 
 num = 20
 for x in range(5):
-    print('Number of star:',x+1,'Top 10 comments: ',top_words(x+1, num)[0])
+    print('Number of star:',x+1,'Top 10 comments: ',top_words(x+1, num))
     
 # conn.commit()
 # conn.close()

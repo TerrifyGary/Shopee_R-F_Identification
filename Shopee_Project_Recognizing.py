@@ -159,7 +159,12 @@ def get_web_info(url):
 
     else:
         return 0
-    
+
+def scoring(fake_time,rating_bad,rating_star):
+    score = 1000
+    score -= (fake_time*200+rating_bad*100-rating_star*10)
+
+    return score
 if __name__ == '__main__':
 
     # text = input("Enter Seller Name : ")
@@ -173,7 +178,7 @@ if __name__ == '__main__':
 
     # print(len(seller_comment))
     print('The Number of comments from 1~5 star = ',num_of_comment)
-    print('Numbers of Fake Detected = ',couting_times(seller_comment))
+    # print('Numbers of Fake Detected = ',couting_times(seller_comment))
     print('Fake Words appearence times = ',couting_fake(seller_comment))
     print('Numbers of Rating Bad = ',rating_bad(text))
     print('The avg raring star = ',rating_star(text))
@@ -182,3 +187,4 @@ if __name__ == '__main__':
     print('The Price of this site is :',price)
     print('Delta Price = ',abs(mall_price-price))
     print("It takes %s seconds to finish the code." % (time.time() - start_time))
+    print('The score of the seller being real is ',scoring(couting_fake(seller_comment),rating_bad(text),response_rate(text)),'/1000')
