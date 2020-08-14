@@ -29,8 +29,7 @@ five_star_len2_words = []
 five_star_len1_words = []
 
 
-fake_one_len1_words = ["假","仿"]
-fake_one_len2_words = ["仿冒","山寨","假貨"]
+
 
 def scraping_comments(seller_name, star_of_comment):
     
@@ -84,6 +83,8 @@ def couting_fake(comments):
 
     f_word_times = 0
 
+    fake_one_len1_words = ["假","仿"]
+    fake_one_len2_words = ["仿冒","山寨","假貨"]
     for x in comments:
         f_word_times  = get_word_times_in_sentence(x,fake_one_len2_words,f_word_times)
         f_word_times  = get_word_times_in_sentence(x,fake_one_len1_words,f_word_times)
@@ -155,10 +156,10 @@ def get_web_info(url):
             s_ = s.text
             # print(p_,s_)
         
-        return p_,s_ # p_ stands for the price of the website, s_ stands for the seller name of the website
+            return p_,s_ # p_ stands for the price of the website, s_ stands for the seller name of the website
 
     else:
-        return 0
+        return 404,404
 
 def scoring(fake_time,rating_bad,rating_star):
     score = 1000
@@ -172,19 +173,20 @@ if __name__ == '__main__':
     product_webpage_url = input("Enter Your Product Page URL : ")
     start_time = time.time() # Recording the time of running the code
     price,text = get_web_info(product_webpage_url)
-    mall_price = get_mall_price(f"https://shopee.tw/mall/search?keyword={product}")
-    for x in range(1,6,1):
-        scraping_comments(text,x)
+    print(text)
+    # mall_price = get_mall_price(f"https://shopee.tw/mall/search?keyword={product}")
+    # for x in range(1,6,1):
+    #     scraping_comments(text,x)
 
-    # print(len(seller_comment))
-    print('The Number of comments from 1~5 star = ',num_of_comment)
-    # print('Numbers of Fake Detected = ',couting_times(seller_comment))
-    print('Fake Words appearence times = ',couting_fake(seller_comment))
-    print('Numbers of Rating Bad = ',rating_bad(text))
-    print('The avg raring star = ',rating_star(text))
-    print('The response rate = ',response_rate(text))
-    print('Official Shopee Price is :',mall_price)
-    print('The Price of this site is :',price)
-    print('Delta Price = ',abs(mall_price-price))
-    print("It takes %s seconds to finish the code." % (time.time() - start_time))
-    print('The score of the seller being real is ',scoring(couting_fake(seller_comment),rating_bad(text),response_rate(text)),'/1000')
+    # # print(len(seller_comment))
+    # print('The Number of comments from 1~5 star = ',num_of_comment)
+    # # print('Numbers of Fake Detected = ',couting_times(seller_comment))
+    # print('Fake Words appearence times = ',couting_fake(seller_comment))
+    # print('Numbers of Rating Bad = ',rating_bad(text))
+    # print('The avg raring star = ',rating_star(text))
+    # print('The response rate = ',response_rate(text))
+    # print('Official Shopee Price is :',mall_price)
+    # print('The Price of this site is :',price)
+    # print('Delta Price = ',abs(mall_price-price))
+    # print("It takes %s seconds to finish the code." % (time.time() - start_time))
+    # print('The score of the seller being real is ',scoring(couting_fake(seller_comment),rating_bad(text),response_rate(text)),'/1000')
