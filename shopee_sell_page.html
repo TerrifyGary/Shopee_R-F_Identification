@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <script>
+        // QOS start time must be as early as possible.
+        var QOS_PAGE_START_MS = Date.now ? Date.now() : +new Date();
+    </script>
+    <meta charset="utf-8" />
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <meta content="iPs61v3hykiEZMnCl4W2izgZzaXLNbJRNLHvi9_-UUs" name="google-site-verification">
+    <meta content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="white" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="" name="apple-mobile-web-app-title" />
+    <link href="/static/images/logo-152x152.png" rel="apple-touch-icon" />
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <meta content="noindex" name="robots" />
+    <link href="/static/css/common.css?9964adca5df1" rel="stylesheet" />
+    <link href="/static/css/icons.css?1b35809c1ec3" rel="stylesheet" />
+    <link href="/static/css/fonts.css?25a358e3467e" rel="stylesheet" />
+    <link href="/static/css/common/web_popup.css?ff9073462c34" rel="stylesheet" />
+    <link href="/static/css/common/web_popup_box.css?0afada473953" rel="stylesheet" />
+    <title>Shopee</title>
+    <script type="text/javascript">
+        ; (function () {
+            var SCRIPT_FAIL_THRESHOLD = 90000;
+            setTimeout(function () {
+                if (window.$ || window.jQuery) {
+                    // console.log("jquery has been loaded successfully");
+                    return true;
+                } else {
+                    // jquery is not loaded after max timeout, we considered the script has fail to load
+                    // it's time to show error message
+
+                    // clear whatever dom content we have
+                    document.body.innerHTML = document.getElementById("tap-to-reload").innerHTML;
+                    document.body.addEventListener("touchend", function () {
+                        window.location.reload(true); // reload from server, not cache
+                    }, false);
+
+                    // set alert message to vertical center
+                    var alertMessageDom = document.getElementsByClassName("alert-message")[0];
+                    var viewportHeight = document.documentElement.clientHeight;
+                    alertMessageDom.style.marginTop
+                        = Math.floor((viewportHeight - alertMessageDom.style.lineHeight) / 2) + "px";
+                }
+            }, SCRIPT_FAIL_THRESHOLD);
+        })();
+    </script>
+    <script id="tap-to-reload" type="text/template">
+    <style>
+        body {
+            vertical-align : middle;
+            text-align : center;
+        }
+        .alert-message {
+            font-size : 18px;
+            vertical-align : middle;
+            display : inline-block;
+        }
+    </style>
+    <p class="alert-message">
+        Tap to reload again
+    </p>
+</script>
+    <script type="text/javascript">
+        var ORIGIN_WHITE_LIST = ['www.facebook.com', 'facebook.com'];
+        function isSameOrigin() {
+            var selfHost = window.self.location.hostname;
+            var topHost = window.top.location.hostname;
+
+            if (topHost in ORIGIN_WHITE_LIST) {
+                return true;
+            }
+            // same domain, including 127.0.0.1, localhost etc
+            if (selfHost === topHost) {
+                return true;
+            }
+            // other domain not contain shopee keyword
+            if (topHost.indexOf('shopee') === -1) {
+                return false;
+            }
+            var topRootDomain = topHost.slice(topHost.indexOf('shopee'));
+            var selfRootDomain = selfHost.slice(selfHost.indexOf('shopee'));
+            return topRootDomain == selfRootDomain;
+        }
+
+        if (!isSameOrigin()) {
+            document.body.style.display = 'none';
+        } else { }
+    </script>
+    <script type="text/javascript">
+
+
+
+        {
+            function _getGlobals_() {
+                var toRet = {};
+                try {
+                    for (var k in window) {
+                        if (window.hasOwnProperty(k))
+                            toRet[k] = true;
+                    }
+                }
+                catch (e) { }
+                return toRet;
+            }
+            window._resetGlobals_ = function (resetTo) {
+                var vars = resetTo;
+                for (var k in window) {
+                    if (window.hasOwnProperty(k) && vars[k] == null) {
+                        window[k] = null; //Note: delete doesn't work for window's fields.
+                    }
+                }
+            };
+            if (navigator.userAgent.indexOf('Shopee') >= 0 && (navigator.userAgent.indexOf('iPhone') >= 0 || navigator.userAgent.indexOf('iPad') >= 0 || navigator.userAgent.indexOf('iPod') >= 0)) {
+                window.ORIGINAL_GLOBAL_VARS = _getGlobals_();
+            }
+            window.GTimeoutAndInterval = (function () {
+                var idsTimeout = {};
+                var idsInterval = {};
+                var funcSetTimeout = window.setTimeout;
+                var funcClearTimeout = window.clearTimeout;
+                var funcSetInterval = window.setInterval;
+                var funcClearInterval = window.clearInterval;
+
+                window.setTimeout = function (func, delay) {
+                    var id = funcSetTimeout(func, delay);
+                    idsTimeout[id] = id;
+                    return id;
+                };
+                window.clearTimeout = function (id) {
+                    funcClearTimeout(id);
+                    delete idsTimeout[id];
+                };
+
+                window.setInterval = function (func, interval) {
+                    var id = funcSetInterval(func, interval);
+                    idsInterval[id] = id;
+                    return id;
+                };
+                window.clearInterval = function (id) {
+                    funcClearInterval(id);
+                    delete idsInterval[id];
+                };
+
+                function clearAll(skipSelf) {
+                    for (var k in idsTimeout)
+                        funcClearTimeout(k);
+                    for (var k in idsInterval)
+                        funcClearInterval(k);
+                    idsTimeout = {};
+                    idsInterval = {};
+                    if (skipSelf) return;
+
+                    window.setTimeout = funcSetTimeout;
+                    window.setInterval = funcSetInterval;
+                    window.clearTimeout = funcClearTimeout;
+                    window.clearInterval = funcClearInterval;
+                    funcSetTimeout = null;
+                    funcClearTimeout = null;
+                    funcClearInterval = null;
+                    funcSetInterval = null;
+                }
+
+                return {
+                    clearAll: clearAll,
+                };
+            })();
+
+            function hookEventTarget(target) {
+                var p = target.prototype || target.__proto__;
+                if (!p) return;
+
+                p.addEventListenerBase = p.addEventListener;
+                p.addEventListener = function (type, listener) {
+                    if (!this.EventList) { this.EventList = {}; }
+                    // This condition prevents the crash when jQueryMobile is re-evaluated after iOS cache invalidation. (Comment out this condition and force cache invalidation in iOS to see the crash in action.)
+                    if (this.addEventListenerBase)
+                        this.addEventListenerBase.apply(this, arguments);
+                    if (!this.EventList[type]) { this.EventList[type] = []; }
+                    var list = this.EventList[type];
+                    for (var index = 0; index != list.length; index++) {
+                        if (list[index] === listener) { return; }
+                    }
+                    list.push(listener);
+                };
+
+                p.removeEventListenerBase = p.removeEventListener;
+                p.removeEventListener = function (type, listener) {
+                    if (!this.EventList) { this.EventList = {}; }
+                    // This second condition prevents the crash when jQueryMobile is re-evaluated after iOS cache invalidation.
+                    if ((listener instanceof Function) && this.removeEventListenerBase) {
+                        this.removeEventListenerBase.apply(this, arguments);
+                    }
+                    if (!this.EventList[type]) { return; }
+                    var list = this.EventList[type];
+                    for (var index = 0; index != list.length;) {
+                        var item = list[index];
+                        if (!listener) {
+                            this.removeEventListenerBase(type, item);
+                            list.splice(index, 1); continue;
+                        }
+                        else if (item === listener) {
+                            list.splice(index, 1); break;
+                        }
+                        index++;
+                    }
+                    if (list.length == 0) { delete this.EventList[type]; }
+                };
+
+                p.removeAllEvents = function () {
+                    if (!this.EventList) return;
+                    for (var type in this.EventList) {
+                        if (!this.EventList.hasOwnProperty(type)) continue;
+                        var list = this.EventList[type];
+                        if (!list) continue;
+                        for (var j = 0; j < list.length; j++) {
+                            this.removeEventListenerBase(type, list[j]);
+                        }
+                        delete this.EventList[type];
+                    }
+                };
+            }
+
+            function unhookEventTarget(target) {
+                var p = target.prototype || target.__proto__;
+                if (!p) return;
+
+                if (p.addEventListenerBase)
+                    p.addEventListener = p.addEventListenerBase;
+                if (p.removeEventListenerBase)
+                    p.removeEventListener = p.removeEventListenerBase;
+            }
+
+            try {
+                // Note: Originally I wanted to do this with EventTarget.prototype...., but seems iOS doesn't expose EventTarget interface. So we have to do it one by one.
+                hookEventTarget(Window);
+                hookEventTarget(Document);
+                hookEventTarget(Element);
+            }
+            catch (e) {
+                console.log('hookEventTarget.ex', e);
+            }
+        }
+    </script>
+    <script type="text/javascript">
+
+
+        var USERID = null;
+        var ALERT_LIKE_PRIVACY_MSG = false;
+        var CC_INSTALLMENT_PAYMENT_ELIGIBILITY = true;
+        var NON_CC_INSTALLMENT_PAYMENT_ELIGIBILITY = false;
+
+
+
+
+        var CURRENT_PATH = '/現貨免運\u002DAdidas\u002DYEEZY\u002D350\u002DV2\u002DBOOST\u002D愛迪達\u002D黑魂黑天使\u002D全白純白\u002D侃爺椰子\u002D運動鞋\u002D情侶鞋\u002Di.254338539.4740816854 254339304';
+
+        var CURRENT_SHOPID = 'None';
+        var VERSION = '';
+        var APPVER = '';
+        var LANGUAGE = 'zhHant';
+        var IS_FB_APP = false;
+
+        var T_EM_H = '';
+
+
+    </script>
+    <script type="text/javascript">
+
+
+        var LOCALE = 'TW';
+        var ENVIRONMENT = 'LIVE';
+        var POPTAB_FIRST = true;
+        var POPTAB_FIRST_HASHTAG = false;
+        var SHOW_TOP_SALES_TABS = true;
+
+        var ITEM_IMAGE_BASE_URL = 'https://cf.shopee.tw/file/';
+        var ITEM_VIDEO_BASE_URL = 'https://cv.shopee.tw/video/';
+        var ROOT_DOMAIN = 'shopee.tw';
+        var COOKIE_DOMAIN = 'shopee.tw';
+
+
+        var msg_server_error = '伺服器錯誤';
+        var label_ok = 'OK';
+
+        var T_GA_ID = 'UA\u002D61915057\u002D6';
+        var T_GA_ID_PC = 'UA\u002D61915057\u002D6';
+        var T_FB_ID = '503280033161781';
+        var T_CRITEO_ID = '34651';
+
+
+
+
+        var T_BI_SIG = "SPC_T_ID";
+        var T_BI_IV = "SPC_T_IV";
+        var SHOW_SHOPEE_VERIFIED_FILTER = true;
+        var SHOW_IN_PAGE_FILTER = false;
+        var MARKET_TRACKING_TOKEN_NAME = "smtt_v0";
+        var MARKET_TRACKING_TOKEN_V2_NAME = "smtt";
+        var MARKET_TRACKING_ADS_AFFILIATION_TOKEN = "sp_af";
+        var RN_BUNDLE_VERSION_COOKIE_NAME = "SPC_RNBV";
+        var PRICEZA_MERCHANT_ID = 7077;
+        var CONFIG_WALLET_KYC = false;
+        var AIRPAY_CLIENT_API_ENDPOINT = '';
+        var CONFIG_COIN_INFLATION = 100;
+        var CONFIG_CONTACT_US_NUMBER = JSON.parse('{\u0022phone_number\u0022:\u0022(02) 6636 6559\u0022,\u0022operating_hours\u0022:\u0022週一至週五: 9:00\u002D 18:00, 國定假日除外\u0022,\u0022email_address\u0022:\u0022support@shopee.tw\u0022}')['phone_number'];
+
+
+        var IS_MALL_PAGE = true;
+        var STATIC_URL = '/static/';
+        var SIMPLE_VERSION = false;
+        var DEBUG = false;
+        var LOCALHOST = false;
+        var STAGING = false;
+        var ANDROID_FRIENDLY = false;
+        var ENABLE_RATING_REPLY = true;
+        var ADULT_AGE = '18';
+        var ENABLE_LOCATION_FILTER = true;
+        var ENABLE_LOCATION_FILTER_IN_PAGE = false;
+        var CONFIG_BRANDING_SHOPEE_WALLET_AS_MY_WALLET = false;
+        var CONFIG_ENABLE_AIRPAY_BUYER_WALLET = false;
+        var CONFIG_ENABLE_SHOPEE_BUYER_WALLET_V2 = false;
+        var SHOW_SOLD_COUNT = true;
+        var OPC_CART_MUST_HAVE_ADDRESS = false;
+        var CONFIG_FLASH_SALE_NAMED_AS_FLASH_DEAL = false;
+        var SHIPPING_OPTION_FILTER = true;
+        var ENABLE_SHIPPING_FILTER_PAGE = false;
+        var CONFIG_FLASH_SALE_NAME_KEY = "flash_sale";
+        var CONFIG_OFFICIAL_SHOP_ROOT_URL = "/mall";
+        var show_from_same_shop = true;
+        var CONFIG_SHOW_FROM_SAME_SHOP_SHOW_SECTION = true;
+        var ENABLE_OFFICIAL_SHOP_FILTER = true;
+        var ENABLE_OFFICIAL_SHOP_FILTER_IN_PAGE = false;
+        var ENABLE_CC_INSTALLMENT_PAYMENT = true;
+        var ENABLE_NON_CC_INSTALLMENT_PAYMENT = false;
+        var LOWEST_PRICE_GUARANTEE_SHOP = [{ "userid": 10937, "shopid": 10937 }];
+        var INSTALLMENT_FILTER = false;
+        var CONFIG_BRAND_LIST = false;
+        var CONFIG_RW_ONE_PAGE_CHECKOUT = true;
+        var CONFIG_ENABLE_LOCAL_WALLET = false;
+        var CONFIG_DIGIT_GROUP_SYMBOL = ",";
+        var CONFIG_FREE_SHIPPING_VOUCHER = true;
+        var TRACKING_URL_PARAMS = ["smtt", "smtt_v0"];
+        var MARKET_UNIVERSAL_LANDING_PAGE_PREFIX = "/universal-link";
+        var CONFIG_ROUND_TO_DECIMAL_PLACE_FOR_BUYER_WALLET = 0;
+        var DS_GEO_DOMAIN = "https://geo.idata.shopee.com";
+        var VIEW_NAME = "unrecognized-url";
+
+
+        var _gaq = [];
+
+        var _djangofy_t_ = {};
+
+        var _transify_t_ = {};
+
+        var i18njs = false;
+
+        window.criteo_q = window.criteo_q || [];
+
+        window.RN_PERCENTAGE = { "default": 100, "just_for_you": 0, "checkout": 100 };
+        window.RN_PAGE_MIN_VERSION_ANDROID = { "default": 21416, "checkout": 21200 };
+        window.RN_PAGE_MIN_VERSION_IOS = { "default": 21400, "checkout_cancel_provide_reason": 24705, "checkout": 21200 };
+        window.RN_PAGE_MIN_VERSION_BUNDLE = { "default": 0, "checkout_cancel_provide_reason": 3033000, "new_change_payment_method_page": 4010000, "buy_again_improvement": 4022000, "order_paid": 2066000 };
+
+    </script>
+    <script>
+        var gtmDataLayer = [{
+            'country': window.LOCALE.toLowerCase(),
+            'userid': window.USERID,
+            'source': 'mweb'
+        }];
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'gtmDataLayer', 'GTM-WJZQSJF');</script>
+    <!-- End Google Tag Manager -->
+    <script>
+        function _fb_track_checkout_conversion(value, currency) { }
+        function _fb_track_add_to_cart_conversion(value, currency) { }
+
+        var T_CRITEO_ID = null;
+    </script>
+    <script src="/static/jslib_min/jslib_base.js?6a90fa12ec39" type="text/javascript"></script>
+    <script>
+        _transify_t_["label_mil_id"] = "juta";
+        _transify_t_["label_mil_ph"] = "mil";
+        _transify_t_["alert_set_default_ba_failed"] = "alert_set_default_ba_failed";
+        _transify_t_["label_ok"] = "OK";
+        _transify_t_["label_mil_th"] = "million";
+        _transify_t_["tooltips_shipping_fee_included"] = "你可以使用\u0022出價\u0022功能來跟賣家討論運費金額或運送方式";
+        _transify_t_["label_used"] = "二手";
+        _transify_t_["label_used_good"] = "二手 (挺好的)";
+        _transify_t_["label_years"] = "年";
+        _transify_t_["label_apps"] = "Apps";
+        _transify_t_["text_download_shopee_for_more_function"] = "快來下載蝦皮購物APP，等你喔！";
+        _transify_t_["alert_bank_account_wallet_pin_changed"] = "你的帳戶目前還在審核中。請稍後再試一次，或聯繫{{hotline}} 以獲得幫助。";
+        _transify_t_["label_short_for_number_100000000"] = "億";
+        _transify_t_["label_copied_failed"] = "複製失敗";
+        _transify_t_["label_within_hours"] = "幾小時內";
+        _transify_t_["label_short_for_number_10000"] = "萬";
+        _transify_t_["label_latest"] = "最新";
+        _transify_t_["alert_set_rejected_account_default"] = "無法將被拒絕的帳戶設為預設";
+        _transify_t_["label_new_without_tags"] = "全新已拆吊牌";
+        _transify_t_["label_price"] = "價格";
+        _transify_t_["alert_bank_account_no_change"] = "此帳戶已存在，請輸入新的銀行帳戶";
+        _transify_t_["label_cancel"] = "取消";
+        _transify_t_["label_year_abbr"] = "年";
+        _transify_t_["alert_bank_account_duplicate"] = "銀行帳號資料已存在";
+        _transify_t_["alert_bank_info_not_valid"] = "抱歉，你的銀行帳號無效，請再次填入";
+        _transify_t_["label_week"] = "週";
+        _transify_t_["label_day"] = "天";
+        _transify_t_["tooltips_days_to_ship"] = "賣家在出貨前的準備天數";
+        _transify_t_["label_day_abbr"] = "天";
+        _transify_t_["label_not_set"] = "未設定";
+        _transify_t_["tooltips_shipping_fee_included_my"] = "If you are shipping to East Malaysia or want to negotiate the shipping fee, please chat with seller";
+        _transify_t_["msg_ios_coming_soon"] = "iOS版本Coming soon";
+        _transify_t_["label_popular"] = "綜合排名";
+        _transify_t_["alert_delete_default_account"] = "無法刪除預設的銀行帳號";
+        _transify_t_["label_hour"] = "小時";
+        _transify_t_["label_within_1_day"] = "within 1 day";
+        _transify_t_["label_prep_within"] = "不超過";
+        _transify_t_["alert_delete_pending_account"] = "因為有訂單/退款等待審核中，所以無法刪除這個帳戶";
+        _transify_t_["label_store_number"] = "門市店號";
+        _transify_t_["label_hours"] = "小時";
+        _transify_t_["label_k_th"] = "พัน";
+        _transify_t_["label_copied_successfully"] = "複製成功";
+        _transify_t_["alert_bank_account_banned"] = "銀行帳戶已被禁用";
+        _transify_t_["label_short_for_number_1000000"] = "M";
+        _transify_t_["label_new_with_defects"] = "全新但有部分瑕疵";
+        _transify_t_["label_get"] = "現在下載";
+        _transify_t_["alert_bank_account_blacklisted"] = "此銀行帳號經系統偵測為高風險帳號，請重新設定其他銀行帳號";
+        _transify_t_["label_k_vn"] = "k";
+        _transify_t_["label_k_ph"] = "k";
+        _transify_t_["alert_bank_account_reach_limit"] = "你的銀行帳號數量已是最大值。";
+        _transify_t_["label_hour_abbr"] = "小時前";
+        _transify_t_["label_new_others"] = "全新 (其他)";
+        _transify_t_["label_days"] = "天";
+        _transify_t_["label_shopee"] = "蝦皮購物";
+        _transify_t_["label_year"] = "年";
+        _transify_t_["label_k_id"] = "rb";
+        _transify_t_["label_weeks"] = "週";
+        _transify_t_["label_used_like_new"] = "二手";
+        _transify_t_["label_new_with_tags"] = "全新";
+        _transify_t_["msg_server_error"] = "伺服器錯誤";
+        _transify_t_["label_mil_vn"] = "tr";
+        _transify_t_["label_week_abbr"] = "週前";
+        _transify_t_["alert_bank_account_phone_changed"] = "你的帳戶目前還在審核中。請稍後再試一次，或聯繫{{hotline}} 以獲得幫助";
+        _transify_t_["label_used_with_defects"] = "二手 (部分瑕疵)";
+        _transify_t_["label_short_for_number_1000"] = "K";
+        _transify_t_["alert_edit_bank_account_error"] = "只能編輯被拒絕的銀行帳號資料";
+        _transify_t_["label_minute_abbr"] = "分鐘前";
+        _transify_t_["label_minute"] = "分鐘";
+        _transify_t_["label_prep_morethan"] = "超過";
+        _transify_t_["label_used_acceptable"] = "二手 (還行)";
+        _transify_t_["label_distance"] = "附近";
+        _transify_t_["label_within_days"] = "幾天內";
+        _transify_t_["label_just_now"] = "剛剛";
+        _transify_t_["label_within_minutes"] = "幾分鐘內";
+        _transify_t_["label_minutes"] = "分鐘";
+    </script>
+    <script src="/static/jsutil_min/site.js?7873b11f23b6" type="text/javascript"></script>
+    <script>
+        _transify_t_["label_help_center"] = "幫助中心";
+    </script>
+    <script src="/static/jsutil_min/help.js?ffcd3fc2a6ec" type="text/javascript"></script>
+    <script>
+    </script>
+    <script id="shopee-action-sheet-item" type="text/template">
+
+<li class='action-sheet-item {% if data.disabled %}disabled{% endif %}' data-id={{data.id}}>
+	<div class='title'>
+		{{data.title}}
+	</div>
+	<div class='subtitle L12'>
+		{% if data.subtitle %}
+			{{data.subtitle}}
+		{% endif %}
+	</div>
+</li>
+
+</script>
+    <script>
+    </script>
+    <script id="drop-down-menu-item" type="text/template">
+
+<li class='drop-down-menu-item {% if data.state %}drop-down-menu-item--disabled{% endif %}' data-id={{data.id}}>
+	<div class='drop-down-menu-item__content'>
+		<div class='drop-down-menu-item__content__title r14'>
+			{{data.title}}
+		</div>
+	</div>
+</li>
+
+</script>
+    <script>
+        _transify_t_["msg_overseas_products_credit_card_only"] = "請使用信用卡／金融卡結帳境外商品";
+        _transify_t_["label_official_shops--TH"] = "Shopee Mall";
+        _transify_t_["label_ok"] = "OK";
+        _transify_t_["label_official_shops--ID"] = "Shopee Mall";
+        _transify_t_["msg_app_geolocation_address"] = "請使用蝦皮App設定此地址的位置。";
+        _transify_t_["label_all_categories_s"] = "所有分類";
+        _transify_t_["label_online"] = "在線上";
+        _transify_t_["msg_cancel_order_upgrade"] = "很抱歉，買家已申請取消此筆訂單。請更新到最新版本以回應買家的申請";
+        _transify_t_["label_official_shops--PH"] = "Shopee Mall";
+        _transify_t_["label_your_activity_are_public"] = "你的粉絲可以看到你說讚的好物哦";
+        _transify_t_["msg_offline_payment_disabled_singular"] = "__seller__ 沒有提供面交付款";
+        _transify_t_["label_unexpected_error"] = "歹勢...系統目前不太穩定，請您稍後再次嘗試，謝謝!";
+        _transify_t_["label_official_shops--VN"] = "Shopee Mall";
+        _transify_t_["text_retrieve_location_failed"] = "找不到此位置";
+        _transify_t_["msg_total_price_exceed_channel_max"] = "你已超過每筆交易的金額上限 (#{max_amount})。若有任何問題，你可以直接聯絡蝦皮客服";
+        _transify_t_["label_official_shops--TW"] = "蝦皮商城";
+        _transify_t_["label_ago"] = "__date__ 前";
+        _transify_t_["text_retrieve_location"] = "讀取中...";
+        _transify_t_["label_learn_more"] = "瞭解更多";
+        _transify_t_["label_official_shops--MY"] = "Shopee Mall";
+        _transify_t_["text_waiting_for_location"] = "等待位置...";
+        _transify_t_["msg_you_will_receive_a_phone_call"] = "你將會接到一通來自蝦皮的電話,電話中將會給予你一組驗證碼,請至下一頁輸入聽到的驗證碼";
+        _transify_t_["msg_buyer_address_not_support_cod"] = "你的地址無法使用貨到付款功能";
+        _transify_t_["msg_seller_has_blocked_you"] = "你已被此賣家加進封鎖名單，你可以查看其他商品。";
+        _transify_t_["label_filter"] = "篩選";
+        _transify_t_["label_see_other_products"] = "查看其他商品";
+        _transify_t_["msg_promo_offline_no_multiple_checkouts"] = "折扣代碼只能適用於單一賣家。請重新編輯你的購物車";
+        _transify_t_["label_change_setting"] = "更改設定";
+        _transify_t_["msg_payment_channel_banned_category"] = "由於你的購物車中包含__category__商品，無法使用__payment_channel__付款。";
+        _transify_t_["label_age_control_ok_customize"] = "我已滿__{age}__歲";
+        _transify_t_["label_age_control_msgs_customize"] = "本分類商品為限制級商品，限__{age}__歲以上會員始可瀏覽及購買。";
+        _transify_t_["label_search_in"] = "搜尋";
+        _transify_t_["label_chat"] = "聊聊";
+        _transify_t_["label_call_me"] = "打電話給我";
+        _transify_t_["label_active_date_ago"] = "__date__前上線";
+        _transify_t_["label_m"] = "公尺";
+        _transify_t_["label_edit_product"] = "修改商品";
+        _transify_t_["label_cart"] = "購物車";
+        _transify_t_["msg_total_price_below_min_amount"] = "此付款方式最低金額為__min_amount__，請您再添購更多商品或選擇別的付款方式。";
+        _transify_t_["msg_cod_not_all_supported_logistic"] = "並不是所有寄送方式都適用取貨付款";
+        _transify_t_["msg_cod_temporarily_suspended"] = "由於你90天內有兩次未取的紀錄， 蝦皮已暫停你的貨到付款選項，請選擇用其他方式付款。";
+        _transify_t_["msg_pls_update_apps"] = "請盡快更新你的app並立即體驗此項功能";
+        _transify_t_["label_like"] = "讚";
+        _transify_t_["label_cancel"] = "取消";
+        _transify_t_["label_official_shops--SG"] = "Shopee Mall";
+        _transify_t_["msg_download_shopee_google"] = "請從 Google Play 商店下載蝦皮購物以使用此功能";
+        _transify_t_["label_follow"] = "關注";
+        _transify_t_["msg_server_error"] = "伺服器錯誤";
+        _transify_t_["label_search_within_category"] = "在 #{categoryName} 中搜尋 \u0022#{searchText}\u0022";
+        _transify_t_["msg_payment_option_maintenance"] = "目前__channelname__系統停機維護中，請選擇其他付款方式，謝謝";
+        _transify_t_["label_age_control_no_customize"] = "我還沒滿__{age}__歲";
+        _transify_t_["msg_order_total_exceed_cod_maximum"] = "抱歉，此金額超過蝦皮支援的寄送最高價值金額。";
+        _transify_t_["label_km"] = "公里";
+        _transify_t_["alert_follow_limit"] = "你已達到關注的上限";
+        _transify_t_["label_following"] = "關注中";
+        _transify_t_["alert_follow_too_frequent"] = "你已達到關注的單日最高上限，請明天再試";
+        _transify_t_["label_within"] = "距離我";
+        _transify_t_["label_share"] = "分享";
+        _transify_t_["msg_total_price_exceed_credit_card_max"] = "哎呀！您已達可使用信用卡交易金額上限， 請選擇其他付款方式結帳（錯誤代碼C07）";
+        _transify_t_["label_more_than_200km_away"] = "超過兩百公里";
+        _transify_t_["msg_promo_code_no_offline_payment"] = "此折扣代碼不適用面交付款";
+    </script>
+    <script src="/static/jsutil_min/jsutil_base.js?ea9e1a3ea89b" type="text/javascript"></script>
+    <script src="/static/jslib/jquery.mobile.custom.min.js?ef4d69c9fa8a" type="text/javascript"></script>
+    <script src="/static/pagejs_min/config.js?d5c0b1924e6e" type="text/javascript"></script>
+    <script src="/static/pagejs_min/server_constant.js?917461ee07fa" type="text/javascript"></script>
+    <script src="/static/jsutil_min/BJBridgeReceiver.js?d7267a64ec5e" type="text/javascript"></script>
+    <script>
+        _transify_t_["msg_facebook_please_copy_link"] = "請複製以下網址，並在Safari中開啟，抱歉造成你的不便。";
+        _transify_t_["label_search_within"] = "搜尋範圍";
+    </script>
+    <script src="/static/pagejs_min/common/deep_linking.js?002107eeee2f" type="text/javascript"></script>
+    <script src="/static/jslib/velocity.min.js?8fb122e8a4ed" type="text/javascript"></script>
+    <script src="/static/jsutil_min/multi_target_event_dispatcher.js?db8f4e5a64b8" type="text/javascript"></script>
+    <script src="/static/pagejs_min/common/app_header_controller.js?1b75c9f515b7" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            AppHeaderController.init($('.header'));
+        });
+
+
+
+    </script>
+    <link
+        href="android-app://com.shopee.tw/shopeetw/home?navRoute=eyJwYXRocyI6W3sid2ViTmF2Ijp7InVybCI6Imh0dHBzOi8vc2hvcGVlLnR3LyVFNyU4RiVCRSVFOCVCMiVBOCVFNSU4NSU4RCVFOSU4MSU4Qi1BZGlkYXMtWUVFWlktMzUwLVYyLUJPT1NULSVFNiU4NCU5QiVFOCVCRiVBQSVFOSU4MSU5NC0lRTklQkIlOTElRTklQUQlODIlRTklQkIlOTElRTUlQTQlQTklRTQlQkQlQkYtJUU1JTg1JUE4JUU3JTk5JUJEJUU3JUI0JTk0JUU3JTk5JUJELSVFNCVCRSU4MyVFNyU4OCVCQSVFNiVBNCVCMCVFNSVBRCU5MC0lRTklODElOEIlRTUlOEIlOTUlRTklOUUlOEItJUU2JTgzJTg1JUU0JUJFJUI2JUU5JTlFJThCLWkuMjU0MzM4NTM5LjQ3NDA4MTY4NTQlMjAyNTQzMzkzMDQ/X2dzcmM9aHR0cHMlM0EvL3Nob3BlZS50dy8lMjVFNyUyNThGJTI1QkUlMjVFOCUyNUIyJTI1QTglMjVFNSUyNTg1JTI1OEQlMjVFOSUyNTgxJTI1OEItQWRpZGFzLVlFRVpZLTM1MC1WMi1CT09TVC0lMjVFNiUyNTg0JTI1OUIlMjVFOCUyNUJGJTI1QUElMjVFOSUyNTgxJTI1OTQtJTI1RTklMjVCQiUyNTkxJTI1RTklMjVBRCUyNTgyJTI1RTklMjVCQiUyNTkxJTI1RTUlMjVBNCUyNUE5JTI1RTQlMjVCRCUyNUJGLSUyNUU1JTI1ODUlMjVBOCUyNUU3JTI1OTklMjVCRCUyNUU3JTI1QjQlMjU5NCUyNUU3JTI1OTklMjVCRC0lMjVFNCUyNUJFJTI1ODMlMjVFNyUyNTg4JTI1QkElMjVFNiUyNUE0JTI1QjAlMjVFNSUyNUFEJTI1OTAtJTI1RTklMjU4MSUyNThCJTI1RTUlMjU4QiUyNTk1JTI1RTklMjU5RSUyNThCLSUyNUU2JTI1ODMlMjU4NSUyNUU0JTI1QkUlMjVCNiUyNUU5JTI1OUUlMjU4Qi1pLjI1NDMzODUzOS40NzQwODE2ODU0JTI1MjAyNTQzMzkzMDQifX1dfQ%3D%3D"
+        rel="alternate">
+    <link
+        href="ios-app://959841107/shopeetw/home?navRoute=eyJwYXRocyI6W3sid2ViTmF2Ijp7InVybCI6Imh0dHBzOi8vc2hvcGVlLnR3LyVFNyU4RiVCRSVFOCVCMiVBOCVFNSU4NSU4RCVFOSU4MSU4Qi1BZGlkYXMtWUVFWlktMzUwLVYyLUJPT1NULSVFNiU4NCU5QiVFOCVCRiVBQSVFOSU4MSU5NC0lRTklQkIlOTElRTklQUQlODIlRTklQkIlOTElRTUlQTQlQTklRTQlQkQlQkYtJUU1JTg1JUE4JUU3JTk5JUJEJUU3JUI0JTk0JUU3JTk5JUJELSVFNCVCRSU4MyVFNyU4OCVCQSVFNiVBNCVCMCVFNSVBRCU5MC0lRTklODElOEIlRTUlOEIlOTUlRTklOUUlOEItJUU2JTgzJTg1JUU0JUJFJUI2JUU5JTlFJThCLWkuMjU0MzM4NTM5LjQ3NDA4MTY4NTQlMjAyNTQzMzkzMDQ/X2dzcmM9aHR0cHMlM0EvL3Nob3BlZS50dy8lMjVFNyUyNThGJTI1QkUlMjVFOCUyNUIyJTI1QTglMjVFNSUyNTg1JTI1OEQlMjVFOSUyNTgxJTI1OEItQWRpZGFzLVlFRVpZLTM1MC1WMi1CT09TVC0lMjVFNiUyNTg0JTI1OUIlMjVFOCUyNUJGJTI1QUElMjVFOSUyNTgxJTI1OTQtJTI1RTklMjVCQiUyNTkxJTI1RTklMjVBRCUyNTgyJTI1RTklMjVCQiUyNTkxJTI1RTUlMjVBNCUyNUE5JTI1RTQlMjVCRCUyNUJGLSUyNUU1JTI1ODUlMjVBOCUyNUU3JTI1OTklMjVCRCUyNUU3JTI1QjQlMjU5NCUyNUU3JTI1OTklMjVCRC0lMjVFNCUyNUJFJTI1ODMlMjVFNyUyNTg4JTI1QkElMjVFNiUyNUE0JTI1QjAlMjVFNSUyNUFEJTI1OTAtJTI1RTklMjU4MSUyNThCJTI1RTUlMjU4QiUyNTk1JTI1RTklMjU5RSUyNThCLSUyNUU2JTI1ODMlMjU4NSUyNUU0JTI1QkUlMjVCNiUyNUU5JTI1OUUlMjU4Qi1pLjI1NDMzODUzOS40NzQwODE2ODU0JTI1MjAyNTQzMzkzMDQifX1dfQ%3D%3D"
+        rel="alternate">
+    <meta
+        content="shopeetw://home?navRoute=eyJwYXRocyI6W3sid2ViTmF2Ijp7InVybCI6Imh0dHBzOi8vc2hvcGVlLnR3LyVFNyU4RiVCRSVFOCVCMiVBOCVFNSU4NSU4RCVFOSU4MSU4Qi1BZGlkYXMtWUVFWlktMzUwLVYyLUJPT1NULSVFNiU4NCU5QiVFOCVCRiVBQSVFOSU4MSU5NC0lRTklQkIlOTElRTklQUQlODIlRTklQkIlOTElRTUlQTQlQTklRTQlQkQlQkYtJUU1JTg1JUE4JUU3JTk5JUJEJUU3JUI0JTk0JUU3JTk5JUJELSVFNCVCRSU4MyVFNyU4OCVCQSVFNiVBNCVCMCVFNSVBRCU5MC0lRTklODElOEIlRTUlOEIlOTUlRTklOUUlOEItJUU2JTgzJTg1JUU0JUJFJUI2JUU5JTlFJThCLWkuMjU0MzM4NTM5LjQ3NDA4MTY4NTQlMjAyNTQzMzkzMDQ/X2dzcmM9aHR0cHMlM0EvL3Nob3BlZS50dy8lMjVFNyUyNThGJTI1QkUlMjVFOCUyNUIyJTI1QTglMjVFNSUyNTg1JTI1OEQlMjVFOSUyNTgxJTI1OEItQWRpZGFzLVlFRVpZLTM1MC1WMi1CT09TVC0lMjVFNiUyNTg0JTI1OUIlMjVFOCUyNUJGJTI1QUElMjVFOSUyNTgxJTI1OTQtJTI1RTklMjVCQiUyNTkxJTI1RTklMjVBRCUyNTgyJTI1RTklMjVCQiUyNTkxJTI1RTUlMjVBNCUyNUE5JTI1RTQlMjVCRCUyNUJGLSUyNUU1JTI1ODUlMjVBOCUyNUU3JTI1OTklMjVCRCUyNUU3JTI1QjQlMjU5NCUyNUU3JTI1OTklMjVCRC0lMjVFNCUyNUJFJTI1ODMlMjVFNyUyNTg4JTI1QkElMjVFNiUyNUE0JTI1QjAlMjVFNSUyNUFEJTI1OTAtJTI1RTklMjU4MSUyNThCJTI1RTUlMjU4QiUyNTk1JTI1RTklMjU5RSUyNThCLSUyNUU2JTI1ODMlMjU4NSUyNUU0JTI1QkUlMjVCNiUyNUU5JTI1OUUlMjU4Qi1pLjI1NDMzODUzOS40NzQwODE2ODU0JTI1MjAyNTQzMzkzMDQifX1dfQ%3D%3D"
+        property="al:ios:url">
+    <meta content="959841107" property="al:ios:app_store_id">
+    <meta
+        content="shopeetw://home?navRoute=eyJwYXRocyI6W3sid2ViTmF2Ijp7InVybCI6Imh0dHBzOi8vc2hvcGVlLnR3LyVFNyU4RiVCRSVFOCVCMiVBOCVFNSU4NSU4RCVFOSU4MSU4Qi1BZGlkYXMtWUVFWlktMzUwLVYyLUJPT1NULSVFNiU4NCU5QiVFOCVCRiVBQSVFOSU4MSU5NC0lRTklQkIlOTElRTklQUQlODIlRTklQkIlOTElRTUlQTQlQTklRTQlQkQlQkYtJUU1JTg1JUE4JUU3JTk5JUJEJUU3JUI0JTk0JUU3JTk5JUJELSVFNCVCRSU4MyVFNyU4OCVCQSVFNiVBNCVCMCVFNSVBRCU5MC0lRTklODElOEIlRTUlOEIlOTUlRTklOUUlOEItJUU2JTgzJTg1JUU0JUJFJUI2JUU5JTlFJThCLWkuMjU0MzM4NTM5LjQ3NDA4MTY4NTQlMjAyNTQzMzkzMDQ/X2dzcmM9aHR0cHMlM0EvL3Nob3BlZS50dy8lMjVFNyUyNThGJTI1QkUlMjVFOCUyNUIyJTI1QTglMjVFNSUyNTg1JTI1OEQlMjVFOSUyNTgxJTI1OEItQWRpZGFzLVlFRVpZLTM1MC1WMi1CT09TVC0lMjVFNiUyNTg0JTI1OUIlMjVFOCUyNUJGJTI1QUElMjVFOSUyNTgxJTI1OTQtJTI1RTklMjVCQiUyNTkxJTI1RTklMjVBRCUyNTgyJTI1RTklMjVCQiUyNTkxJTI1RTUlMjVBNCUyNUE5JTI1RTQlMjVCRCUyNUJGLSUyNUU1JTI1ODUlMjVBOCUyNUU3JTI1OTklMjVCRCUyNUU3JTI1QjQlMjU5NCUyNUU3JTI1OTklMjVCRC0lMjVFNCUyNUJFJTI1ODMlMjVFNyUyNTg4JTI1QkElMjVFNiUyNUE0JTI1QjAlMjVFNSUyNUFEJTI1OTAtJTI1RTklMjU4MSUyNThCJTI1RTUlMjU4QiUyNTk1JTI1RTklMjU5RSUyNThCLSUyNUU2JTI1ODMlMjU4NSUyNUU0JTI1QkUlMjVCNiUyNUU5JTI1OUUlMjU4Qi1pLjI1NDMzODUzOS40NzQwODE2ODU0JTI1MjAyNTQzMzkzMDQifX1dfQ%3D%3D"
+        property="al:android:url">
+    <meta content="com.shopee.tw" property="al:android:package">
+    </meta>
+    </meta>
+    </meta>
+    </meta>
+    </link>
+    </link>
+    </link>
+    </meta>
+    </meta>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-WJZQSJF"
+            style="display:none;visibility:hidden" width="0"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="header">
+        <div class="inner middle-centered-div">
+            <div class="icon_left ic_icon ic_arrow_back clickable_area">
+            </div>
+            <div class="search-bar flex1 hidden">
+                <div class="search-bar-input-wrapper middle-centered-div flex1">
+                    <div class="ic_search ic_icon"></div>
+                    <form action="." class="search_form flex1">
+                        <input class="search-input flex1 L12" type="search" />
+                    </form>
+                    <div class="dropdown-holder">
+                        <div class="dropdown-content one r12">
+                        </div>
+                        <div class="dropdown-content two r12">
+                        </div>
+                    </div>
+                </div>
+                <div class="search-bar-space-holder flex1 hidden page_name L16">
+                </div>
+                <div class="ic_search_red ic_icon hidden clickable_area"></div>
+            </div>
+            <div class="no-search-bar-holder center-nav flex1">
+                <div class="search-bar-space-holder flex1 page_name L16 truncate">
+                </div>
+            </div>
+            <div class="second-panel">
+                <a href="/buyer/login/signup/">
+                    <div class="signup-btn">註冊</div>
+                </a>
+                <a href="/buyer/login/">
+                    <div class="login-btn">登入</div>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="header-holder">
+    </div>
+    <div class="body-mask">
+    </div>
+    <div class="lure-hold">
+        <div class="close_btn but_no_close" onclick="hideProm()">
+        </div>
+        <div class="dogi-logo">
+            <div class="ic_logo_get"></div>
+        </div>
+        <div class="show-text L13">
+        </div>
+        <div class="bottom">
+            <div class="get_app_btns_wrapper">
+                <div class="full">
+                    <a class="btn" href="" id="get_app_link" target="_blank">現在下載</a>
+                </div>
+                <div class="half"><a class="btn" href="" id="get_ios_app_link" onclick="_track_download_ios();"
+                        target="_blank">
+                        <div class="ic_IPhone icon"></div>
+                        <div>iPhone</div>
+                    </a>
+                </div>
+                <div class="half"><a class="btn" href="" id="get_android_app_link" onclick="_track_download_android();"
+                        target="_blank">
+                        <div class="ic_Android icon"></div>
+                        <div>Android</div>
+                    </a></div>
+            </div>
+        </div>
+    </div>
+    <div class="shopee-confirm-modal hidden">
+    </div>
+    <div class="shopee-confirm hidden">
+        <div class="confirm-title">
+            <div class="content"></div>
+        </div>
+        <div class="confirm-message">
+            <div class="content"></div>
+        </div>
+        <div class="confirm-button-holder middle-centered-div">
+            <div class="confirm-button cancel" data-button-id="1"></div>
+            <div class="flex1" data-button-id="0"></div>
+            <div class="confirm-button ok" data-button-id="0"></div>
+        </div>
+    </div>
+    <div class="shopee-action-sheet-mask"></div>
+    <div class="shopee-action-sheet-container center-container isPC">
+    </div>
+    <div id="pin-popup">
+        <div class="popup">
+            <div class="title r16">
+            </div>
+            <div class="message r16">
+            </div>
+            <div class="digit-holder">
+                <div class="digit-input">
+                </div>
+                <div class="digit-input">
+                </div>
+            </div>
+            <div class="btn-holder">
+                <div class="cancelText" data-button-id="1">
+                </div>
+                <div class="okText" data-button-id="0">
+                </div>
+            </div>
+        </div>
+        <div class="digit-keyboard">
+            <div class="digit-row">
+                <div class="digit r14">1</div>
+                <div class="digit r14">2</div>
+                <div class="digit r14">3</div>
+            </div>
+            <div class="digit-row">
+                <div class="digit r14">4</div>
+                <div class="digit r14">5</div>
+                <div class="digit r14">6</div>
+            </div>
+            <div class="digit-row">
+                <div class="digit r14">7</div>
+                <div class="digit r14">8</div>
+                <div class="digit r14">9</div>
+            </div>
+            <div class="digit-row">
+                <div class="digit r14"></div>
+                <div class="digit r14">0</div>
+                <div class="delete r14">刪除</div>
+            </div>
+        </div>
+    </div>
+    <div class="container has-toolbar has-navbar">
+        <div class="error-content">
+            <img src="/static/images/ic_no_404@2x.png" />
+            <h1>404</h1>
+            <p>It looks like something is missing!</p>
+        </div>
+    </div>
+    <div class="web-popup-mask"></div>
+    <div class="web-popup-holder center-container">
+        <div class="title"></div>
+        <div class="image"></div>
+        <div class="text"></div>
+        <div class="button"></div>
+    </div>
+    <div class="web-popup-box-mask"></div>
+    <div class="web-popup-box-holder center-container">
+        <div class="title"></div>
+        <div class="image"></div>
+        <div class="text"></div>
+        <div class="cancel"></div>
+        <div class="confirm"></div>
+    </div>
+    <div class="hidden" id="_alert_bg">
+        <div class="center-container" id="_alert_content">
+            <div class="img hidden"></div>
+            <span></span>
+            <div class="middle-centered-div alert-btn-group">
+                <div class="btn-dismiss-alert flex1">否</div>
+                <div class="btn-confirm-alert flex1">是</div>
+            </div>
+        </div>
+    </div>
+    <div class="center-container hidden" id="_alert_msg">
+        <div class="img hidden"></div>
+        <span></span>
+        <div class="middle-centered-div alert-btn-group">
+            <div class="btn-dismiss-alert flex1">否</div>
+            <div class="btn-confirm-alert flex1">是</div>
+        </div>
+    </div>
+    <div class="page_hide"></div>
+    <div class="general-mask"></div>
+    <script>
+        {
+            var dur = (Date.now ? Date.now() : +new Date()) - QOS_PAGE_START_MS;
+            if (window._track_qos_pageload)
+                _track_qos_pageload(dur);
+            if (window.BI_ANALYTICS)
+                BI_ANALYTICS.qos(QOS_TYPE.HTML, dur);
+        }
+
+        if (window.__plvNeedSaveAllNodesState__) {
+            // __plv_saved_body__ = document.children[0].innerHTML;
+            window.__plv_saved_body__ = document.body.innerHTML;
+        }
+    </script>
+</body>
+
+</html>

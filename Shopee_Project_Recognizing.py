@@ -29,8 +29,7 @@ five_star_len2_words = []
 five_star_len1_words = []
 
 
-fake_one_len1_words = ["假","仿"]
-fake_one_len2_words = ["仿冒","山寨","假貨"]
+
 
 def scraping_comments(seller_name, star_of_comment):
     
@@ -84,6 +83,8 @@ def couting_fake(comments):
 
     f_word_times = 0
 
+    fake_one_len1_words = ["假","仿"]
+    fake_one_len2_words = ["仿冒","山寨","假貨"]
     for x in comments:
         f_word_times  = get_word_times_in_sentence(x,fake_one_len2_words,f_word_times)
         f_word_times  = get_word_times_in_sentence(x,fake_one_len1_words,f_word_times)
@@ -129,42 +130,30 @@ def get_mall_price(url):
     else: 
         return 0
 
-def get_web_info(url):
-    check = True
-    p_, s_ = '',''
-    r_item_page = requests.get(url,headers=headers)
+def get_web_info(url):    
+    shopid, itemid = url.split('.')[-2],url.split('.')[-1] # From the url, we can get the shopid first.
 
-    if r_item_page.status_code == 200:
-        soup_item_page = BeautifulSoup(r_item_page.text,'html.parser')
-        # contents_item_page = soup_item_page.find_all("div",class_ = 'qaNIZv')
-        price_item_page = soup_item_page.find_all("div",class_ = '_3n5NQx')
-        seller_name = soup_item_page.find_all("div",class_ = '_3Lybjn')
+    reseult = requests.get(f"https://shopee.tw/api/v2/shop/get?is_brief=1&shopid={shopid}")
+    data = json.loads(reseult.text)
+    seller_name = data['data']['account']['username']
 
-        # print(seller_name)
-        for p,s in zip(price_item_page,seller_name):
-            p_ = p.text.replace('$','').replace(',','')
-            for word in p_:
-                if(word == '-'): # handling multiple price on same page.
-                    check = False
-                    break
-            if(check == True):
-                p_ = int(p_) 
-            else:
-                a_,b_ = p_.split('-')
-                p_ = (int(a_.replace(' ',''))+int(b_.replace(' ','')))/2
-            s_ = s.text
-            # print(p_,s_)
+    r_ = requests.get(f"https://shopee.tw/api/v2/item/get?itemid={itemid}&shopid={shopid}")
+
+    data_ = json.loads(r_.text)
+    price_max = int(data_['item']['price_max'])/100000
+    price_min = int(data_['item']['price_min'])/100000
+    print((price_max+price_min)/2.0)
+    avg_price = (price_max+price_min)/2.0
         
-        return p_,s_ # p_ stands for the price of the website, s_ stands for the seller name of the website
-
-    else:
-        return 0
+    return avg_price,seller_name # No More BS4 shit!!!
+    
 
 def scoring(fake_time,rating_bad,rating_star):
     score = 1000
     score -= (fake_time*200+rating_bad*100-rating_star*10)
 
     return score
+
 if __name__ == '__main__':
 
     # text = input("Enter Seller Name : ")
@@ -172,6 +161,7 @@ if __name__ == '__main__':
     product_webpage_url = input("Enter Your Product Page URL : ")
     start_time = time.time() # Recording the time of running the code
     price,text = get_web_info(product_webpage_url)
+    print(text)
     mall_price = get_mall_price(f"https://shopee.tw/mall/search?keyword={product}")
     for x in range(1,6,1):
         scraping_comments(text,x)
