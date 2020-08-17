@@ -25,7 +25,7 @@ def send(sum=sum):
         operation = request.form['operation']
 
         seller_comment = []
-        num_of_comment = []
+        # num_of_comment = []
 
         price, text = sp.get_web_info(product_url)
 
