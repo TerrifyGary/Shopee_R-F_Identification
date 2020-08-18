@@ -40,7 +40,7 @@ def send(sum=sum):
             sum = int(sp.couting_fake(seller_comment))
             return render_template('app.html', sum=sum)
 
-        elif operation == 'shipping_time':
+        elif operation == 'response_rate':
 
             sum = float(product_url) - float(product_name)
             return render_template('app.html', sum=sum)
