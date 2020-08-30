@@ -1,0 +1,7 @@
+1. delta price = (normal price - price here) / (normal price ) --> a float between 0-1
+
+2. fake words times = f_times / comments (?) --> a float between 0-1
+
+3. response rate = ( Percentage ) --> float between 0-1
+
+4. rating bad = an integer that counts how many times been rated bad

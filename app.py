@@ -10,12 +10,12 @@ import timeit
 import time
 
 app = Flask(__name__)
+def Scroring(delta_price,response_rate,rating_bad,fake_words):
 
 
 @app.route('/')
 def main():
     return render_template('app.html', static_url_path='/static')
-
 
 @app.route('/send', methods=['POST','GET'])
 def send(sum=sum):
