@@ -148,9 +148,9 @@ def get_web_info(url):
     return avg_price,seller_name # No More BS4 shit!!!
     
 
-def scoring(fake_time,rating_bad,rating_star):
-    score = 1000
-    score -= (fake_time*200+rating_bad*100-rating_star*10)
+def scoring(delta_price, fake_time, rating_bad, rating_star):
+    
+    score = (delta_price+fake_time*200+rating_bad*100+rating_star*10)
 
     return score
 
@@ -159,7 +159,7 @@ if __name__ == '__main__':
     # text = input("Enter Seller Name : ")
     product = input("Enter Product Name : ")
     product_webpage_url = input("Enter Your Product Page URL : ")
-    start_time = time.time() # Recording the time of running the code
+    start_time = time.time() # Recording the time of running the code   
     price,text = get_web_info(product_webpage_url)
     print(text)
     mall_price = get_mall_price(f"https://shopee.tw/mall/search?keyword={product}")
@@ -175,6 +175,6 @@ if __name__ == '__main__':
     print('The response rate = ',response_rate(text))
     print('Official Shopee Price is :',mall_price)
     print('The Price of this site is :',price)
-    print('Delta Price = ',abs(mall_price-price))
+    print('Delta Price = ',abs(mall_price-price)/price)
     print("It takes %s seconds to finish the code." % (time.time() - start_time))
-    print('The score of the seller being real is ',scoring(couting_fake(seller_comment),rating_bad(text),response_rate(text)),'/1000')
+    print('The score of the seller being real is ',scoring((abs(mall_price-price)/price),couting_fake(seller_comment),rating_bad(text),response_rate(text)),'/1000')
