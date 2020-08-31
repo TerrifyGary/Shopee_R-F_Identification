@@ -159,7 +159,7 @@ if __name__ == '__main__':
     # text = input("Enter Seller Name : ")
     product = input("Enter Product Name : ")
     product_webpage_url = input("Enter Your Product Page URL : ")
-    start_time = time.time() # Recording the time of running the code
+    start_time = time.time() # Recording the time of running the code   
     price,text = get_web_info(product_webpage_url)
     print(text)
     mall_price = get_mall_price(f"https://shopee.tw/mall/search?keyword={product}")
@@ -177,4 +177,4 @@ if __name__ == '__main__':
     print('The Price of this site is :',price)
     print('Delta Price = ',abs(mall_price-price)/price)
     print("It takes %s seconds to finish the code." % (time.time() - start_time))
-    print('The score of the seller being real is ',scoring(cabs(mall_price-price)/price),outing_fake(seller_comment),rating_bad(text),response_rate(text)),'/1000')
+    print('The score of the seller being real is ',scoring((abs(mall_price-price)/price),couting_fake(seller_comment),rating_bad(text),response_rate(text)),'/1000')
